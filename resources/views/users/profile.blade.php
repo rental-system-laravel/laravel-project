@@ -1,7 +1,6 @@
 @extends('layouts.dash')
 
 @section('content')
-<<<<<<< HEAD
 <div class="main-panel">
     <div class="content-wrapper">
       <div class="row">
@@ -18,9 +17,6 @@
         </div>
       </div>
 <div class="col-12 grid-margin stretch-card">
-=======
-<div class="col-8 grid-margin stretch-card">
->>>>>>> 7623fbae4da8337e8c3976aeec59dbd28727c61a
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Your Profile</h4>
@@ -67,8 +63,5 @@
         </div>
     </div>
 </div>
-<<<<<<< HEAD
 </div>
-=======
->>>>>>> 7623fbae4da8337e8c3976aeec59dbd28727c61a
 @endsection

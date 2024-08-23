@@ -308,7 +308,11 @@
             </a>
           </li>
           <li class="nav-item">
+<<<<<<< HEAD
            <a class="nav-link" href="{{ route('profile.profileAdmin', Auth::user()->id) }}">
+=======
+           <a class="nav-link" href="{{ route('profile.show', Auth::user()->id) }}">
+>>>>>>> 7623fbae4da8337e8c3976aeec59dbd28727c61a
                 <i class="icon-grid menu-icon"></i>
                 <span class="menu-title">Manage Your Profile</span>
             </a>

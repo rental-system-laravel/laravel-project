@@ -139,6 +139,7 @@ class PropertyController extends Controller
         $properties = Property::with(['user', 'amenities'])->paginate(6);
         return view('frontend.home' , compact('properties'));
 
+<<<<<<< HEAD
     }
     // data for one property
     public function property( string $id)
@@ -153,6 +154,25 @@ class PropertyController extends Controller
         return view('frontend.property-details' , compact( 'property' ,'countOfReview','reviews'));
 
     }
+=======
+    }   
+    // data for one property
+    public function property( string $id)
+    {
+        // Fetch the property with related user
+        $property = Property::with('user')->findOrFail($id);
+    
+        // Count the number of reviews for the property
+        $countOfReview = Review::where('property_id', $id)->count();
+    
+        // Fetch all reviews related to the property along with renter details
+        $reviews = Review::with('renter')->where('property_id', $id)->get();
+    
+        // Pass all data to the view
+        return view('frontend.property-details', compact('property', 'countOfReview', 'reviews'));
+    }
+    
+>>>>>>> 7623fbae4da8337e8c3976aeec59dbd28727c61a
     // listing all property
     public function AllProperty( )
     {
@@ -168,6 +188,7 @@ class PropertyController extends Controller
             'rating' => 'required|integer|min:1|max:5',
             'comment' => 'required|string|max:255',
         ]);
+<<<<<<< HEAD
         $review = new Review();
         $review -> property_id = $validatedData['property_id'];
         $review -> renter_id = $validatedData['property_id'];
@@ -177,6 +198,23 @@ class PropertyController extends Controller
         // $properties = Property::with(['user', 'amenities'])->get();
 
         return redirect()->route('viewProperty', $id)->with('success', 'Review submitted successfully!');
+=======
+        if(Auth::id()){
+            $review = new Review();
+            $review -> property_id = $validatedData['property_id'];
+            $review -> renter_id = $validatedData['renter_id'];
+            $review -> rating = $validatedData['rating'];
+            $review -> comment = $validatedData['comment'];
+            $review->save();
+
+            return redirect()->route('viewProperty', $id)->with('success', 'Review submitted successfully!');
+        }else {
+            return redirect()->route('viewProperty', $id)->withErrors('Error', 'Login to add comment');
+
+        }
+        // $properties = Property::with(['user', 'amenities'])->get();
+
+>>>>>>> 7623fbae4da8337e8c3976aeec59dbd28727c61a
 
     }
 }

@@ -23,7 +23,11 @@ class BookingController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
+<<<<<<< HEAD
     {   
+=======
+    {
+>>>>>>> 7623fbae4da8337e8c3976aeec59dbd28727c61a
         $property = Property::findOrFail(request('property_id')); // Fetch the property by ID from the request
         
         return view('bookings.create', [
@@ -31,6 +35,7 @@ class BookingController extends Controller
             'property' => $property,
         ]);
     }
+<<<<<<< HEAD
     
     public function store(Request $request)
     {
@@ -48,7 +53,30 @@ class BookingController extends Controller
         Booking::create($bookingData);
     
         return redirect()->route('bookings.index')->with('success', 'Booking created successfully.');
+=======
+    public function store(Request $request)
+{
+    $request->validate([
+        'property_id' => 'required|exists:properties,id',
+        'start_date' => 'required|date',
+        'end_date' => 'required|date|after_or_equal:start_date',
+        'total_price' => 'required|numeric|min:0',
+    ]);
+
+    if (auth()->check()) {
+        $bookingData = $request->all();
+        $bookingData['renter_id'] = auth()->id();
+
+        Booking::create($bookingData);
+
+        return redirect()->route('bookings.index')->with('success', 'Booking created successfully.');
+    } else {
+        return redirect()->route('login')->withErrors('You need to log in to create a booking.');
+>>>>>>> 7623fbae4da8337e8c3976aeec59dbd28727c61a
     }
+}
+    
+
 
 
     /**

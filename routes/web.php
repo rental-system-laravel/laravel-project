@@ -7,6 +7,8 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PropertyController;
 
+// use App\Http\Controllers\BookingController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\RenterController;
 
 /*
@@ -85,7 +87,13 @@ Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('l
 
 // تسجيل الخروج
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-use App\Http\Controllers\UserController;
+
+
+Route::post('/check-email', [RegisteredUserController::class, 'checkEmail'])->name('check.email');
+
+
+
+
 
 
 Route::post('/check-email', [RegisteredUserController::class, 'checkEmail'])->name('check.email');
@@ -111,6 +119,7 @@ Route::put('/dashboardB/{id}/update-status', [PropertyController::class, 'update
 
 // ------------------------------------ for sillar----------------------------------
 
+// ------------------------------------ for sillar----------------------------------
 Route::get('/view_property', [PropertyController::class, 'index'])->name('property_admin');
 Route::get('/create_property/{property?}', [PropertyController::class, 'manage'])->name('properties.manage');
 Route::post('/create_property', [PropertyController::class, 'store'])->name('properties.store');
@@ -120,6 +129,7 @@ Route::delete('/properties/{property}', [PropertyController::class, 'destroy'])-
 //     return view('frontend.admin.property_create');
 // })->name('property_admin');
 
+// Route::post('bookings', [BookingController::class, 'store'])->name('bookings.store');
 
 Route::group(['middleware' => ['role:admin']], function () {
     Route::get('/dashboard', function () {
@@ -127,6 +137,7 @@ Route::group(['middleware' => ['role:admin']], function () {
     })->name('dashboard');
     Route::resource('users', UserController::class);
     Route::get('/profileAdmin', [UserController::class, 'profile'])->name('profile.profileAdmin');
+    Route::get('/profile', [UserController::class, 'profile'])->name('profile.show');
 
 });
 Route::get('/Logout', [UserController::class, 'destroy'])->name('destroy');
@@ -134,6 +145,9 @@ Route::get('/Logout', [UserController::class, 'destroy'])->name('destroy');
 //  return view('frontend.admin.property_create');
 //})->name('property_admin');
 use App\Http\Controllers\BookingController;
+
+Route::post('bookings', [BookingController::class, 'store'])->name('bookings.store');
+
 Route::resource('bookings', BookingController::class);
 
 

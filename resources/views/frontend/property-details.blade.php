@@ -297,12 +297,24 @@
                                  {{ session('success') }}
                             </div>
                         @endif
+<<<<<<< HEAD
+=======
+                        @if (session('Error'))
+                            <div class="alert alert-danger">
+                                 {{ session('Error') }}
+                            </div>
+                        @endif
+>>>>>>> 7623fbae4da8337e8c3976aeec59dbd28727c61a
 
                         <form action="  {{ route('submitReview' ,$property->id) }}" method="POST" class="review-form">
                             @csrf <!-- Ensure you include this if youre using Laravel for CSRF protection -->
                             <div class="group-input">
                                 <input type="hidden" name="property_id" value="{{ $property->id }}">
+<<<<<<< HEAD
                                 <input type="hidden" name="renter_id" value="{{  $property->user->id }}">
+=======
+                                <input type="hidden" name="renter_id" value="{{  Auth::id() }}">
+>>>>>>> 7623fbae4da8337e8c3976aeec59dbd28727c61a
                                 <input type="number" name="rating" id="rating" hidden>
                                 <textarea type="text" name="comment" placeholder="Your comment" required style="max-width: 47vw"></textarea>
                             </div>
@@ -351,7 +363,11 @@
         @csrf
         <!-- Hidden input to store property_id -->
         <input type="hidden" id="property_id" name="property_id" value="{{ request('property_id') }}">
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> 7623fbae4da8337e8c3976aeec59dbd28727c61a
         <div class="filter-input">
             <p>Start Date</p>
             <input type="date" id="start_date" name="start_date" value="{{ old('start_date') }}">
@@ -384,19 +400,41 @@
         function calculateTotalPrice() {
             const startDate = new Date(startDateInput.value);
             const endDate = new Date(endDateInput.value);
+<<<<<<< HEAD
 
             if (propertyPrice && startDate && endDate) {
+=======
+            
+            if (propertyPrice && startDate && endDate && endDate >= startDate) {
+>>>>>>> 7623fbae4da8337e8c3976aeec59dbd28727c61a
                 const days = (endDate - startDate) / (1000 * 60 * 60 * 24);
                 totalPriceInput.value = (days * propertyPrice).toFixed(2);
             } else {
                 totalPriceInput.value = '';
             }
+<<<<<<< HEAD
+=======
+            
+>>>>>>> 7623fbae4da8337e8c3976aeec59dbd28727c61a
         }
 
         startDateInput.addEventListener('input', calculateTotalPrice);
         endDateInput.addEventListener('input', calculateTotalPrice);
     });
 </script>
+<<<<<<< HEAD
+=======
+    </form>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Property Details Section End -->
+
+>>>>>>> 7623fbae4da8337e8c3976aeec59dbd28727c61a
 
 <!-- Contact Section Begin -->
 <section class="contact-section">
@@ -487,3 +525,5 @@ document.addEventListener('DOMContentLoaded', function() {
 </section>
 <!-- Contact Section End -->
 @endsection
+message.txt
+26 KB

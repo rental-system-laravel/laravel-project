@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('password');
             $table->enum('role', ['lessor', 'renter', 'admin']);
             $table->string('profile_picture')->nullable();
+            $table->string('address')->nullable();
+            $table->string('phone_number')->nullable();
             $table->rememberToken(); // Adds the remember_token column
             $table->timestamps();
         });

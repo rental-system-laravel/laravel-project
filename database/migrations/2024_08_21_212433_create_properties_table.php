@@ -20,6 +20,13 @@ return new class extends Migration
             $table->string('location');
             $table->decimal('price_per_day', 8, 2);
             $table->boolean('availability')->default(true);
+            $table->integer('number_of_rooms')->nullable();
+            $table->integer('number_of_bathrooms')->nullable();
+            $table->integer('number_of_bedrooms')->nullable();
+            $table->integer('number_of_garage')->nullable();
+            $table->boolean('AC')->nullable();
+            $table->boolean('WIFI')->nullable();
+            $table->boolean('pool')->nullable();
             $table->timestamps();
 
         });

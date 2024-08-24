@@ -8,6 +8,14 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function countAdminUsers()
+{
+    // Count the number of users with the role 'admin'
+    $adminCount = User::where('role', 'admin')->count();
+
+    // Return this count to a view or as JSON
+    return view('frontend.admin.dashboard', ['adminCount' => $adminCount]);
+}
     public function index()
     {
         $users = User::all();

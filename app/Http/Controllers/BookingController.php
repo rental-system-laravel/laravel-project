@@ -6,9 +6,26 @@ use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\Property;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
+use App\Models\User;
 class BookingController extends Controller
 {
+    public function showDashboard()
+    {
+        // Calculate the total number of accepted bookings
+        $acceptedTotal = Booking::where('status', 'accepted')
+                                ->whereDate('updated_at', Carbon::today())
+                                ->count();
+                                $acceptedTotalLongTime = Booking::where('status', 'accepted')
+                                ->count();
+                                $adminCount = User::where('role', 'lessor')->count();
+                                $renterCount = User::where('role', 'renter')->count();
+        return view('frontend.admin.dashboard', ['acceptedTotal' => $acceptedTotal,
+        'acceptedTotalLongTime'=>$acceptedTotalLongTime,
+        'adminCount'=> $adminCount,
+        'renterCount'=>$renterCount
+    ]);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -18,25 +35,22 @@ class BookingController extends Controller
         return view('bookings', ['action' => null, 'bookings' => $bookings]);
     }
 
-
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-<<<<<<< HEAD
-    {   
-=======
     {
->>>>>>> 7623fbae4da8337e8c3976aeec59dbd28727c61a
         $property = Property::findOrFail(request('property_id')); // Fetch the property by ID from the request
-        
+
         return view('bookings.create', [
             'action' => 'create',
             'property' => $property,
         ]);
     }
-<<<<<<< HEAD
-    
+
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
         $request->validate([
@@ -45,39 +59,15 @@ class BookingController extends Controller
             'end_date' => 'required|date|after_or_equal:start_date',
             'total_price' => 'required|numeric|min:0',
         ]);
-    
+
         // Include renter_id from the authenticated user
         $bookingData = $request->all();
         $bookingData['renter_id'] = auth()->id();
-    
-        Booking::create($bookingData);
-    
-        return redirect()->route('bookings.index')->with('success', 'Booking created successfully.');
-=======
-    public function store(Request $request)
-{
-    $request->validate([
-        'property_id' => 'required|exists:properties,id',
-        'start_date' => 'required|date',
-        'end_date' => 'required|date|after_or_equal:start_date',
-        'total_price' => 'required|numeric|min:0',
-    ]);
-
-    if (auth()->check()) {
-        $bookingData = $request->all();
-        $bookingData['renter_id'] = auth()->id();
 
         Booking::create($bookingData);
 
         return redirect()->route('bookings.index')->with('success', 'Booking created successfully.');
-    } else {
-        return redirect()->route('login')->withErrors('You need to log in to create a booking.');
->>>>>>> 7623fbae4da8337e8c3976aeec59dbd28727c61a
     }
-}
-    
-
-
 
     /**
      * Display the specified resource.
@@ -122,16 +112,13 @@ class BookingController extends Controller
         return redirect()->route('bookings.index')->with('success', 'Booking updated successfully.');
     }
 
-
-
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Booking $booking)
-{
-    $booking->delete();
+    {
+        $booking->delete();
 
-    return redirect()->route('bookings.index')->with('success', 'Booking deleted successfully.');
-}
-
+        return redirect()->route('bookings.index')->with('success', 'Booking deleted successfully.');
+    }
 }

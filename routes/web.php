@@ -10,7 +10,7 @@ use App\Http\Controllers\PropertyController;
 // use App\Http\Controllers\BookingController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\RenterController;
-
+use App\Http\Controllers\BookingController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -139,12 +139,13 @@ Route::group(['middleware' => ['role:admin']], function () {
     Route::get('/profileAdmin', [UserController::class, 'profile'])->name('profile.profileAdmin');
     Route::get('/profile', [UserController::class, 'profile'])->name('profile.show');
 
+
 });
 Route::get('/Logout', [UserController::class, 'destroy'])->name('destroy');
 //Route::get('/view_property', function () {
 //  return view('frontend.admin.property_create');
 //})->name('property_admin');
-use App\Http\Controllers\BookingController;
+
 
 Route::post('bookings', [BookingController::class, 'store'])->name('bookings.store');
 
@@ -161,3 +162,5 @@ Route::put('/profile/update', [ProfileController::class, 'update'])->name('profi
 Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+
+Route::get('/dashboard', [BookingController::class, 'showDashboard'])->name('dashboard');

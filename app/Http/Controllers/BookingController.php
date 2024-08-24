@@ -20,10 +20,17 @@ class BookingController extends Controller
                                 ->count();
                                 $adminCount = User::where('role', 'lessor')->count();
                                 $renterCount = User::where('role', 'renter')->count();
+                                $totalBookingPrice = Booking::where('status', 'accepted')
+                                ->sum('total_price');
+                                $totalBookingPriceToday = Booking::where('status', 'accepted')
+                                                 ->whereDate('updated_at', Carbon::today())
+                                                 ->sum('total_price');
         return view('frontend.admin.dashboard', ['acceptedTotal' => $acceptedTotal,
         'acceptedTotalLongTime'=>$acceptedTotalLongTime,
         'adminCount'=> $adminCount,
-        'renterCount'=>$renterCount
+        'renterCount'=>$renterCount,
+        'totalBookingPrice'=>$totalBookingPrice,
+        'totalBookingPriceToday'=>$totalBookingPriceToday
     ]);
     }
     /**

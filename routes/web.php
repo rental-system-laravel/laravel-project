@@ -138,7 +138,7 @@ Route::group(['middleware' => ['role:admin']], function () {
     Route::resource('users', UserController::class);
     Route::get('/profileAdmin', [UserController::class, 'profile'])->name('profile.profileAdmin');
     Route::get('/profile', [UserController::class, 'profile'])->name('profile.show');
-
+    Route::get('/dashboard', [BookingController::class, 'showDashboard'])->name('dashboard');
 
 });
 Route::get('/Logout', [UserController::class, 'destroy'])->name('destroy');
@@ -163,4 +163,4 @@ Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show')
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
-Route::get('/dashboard', [BookingController::class, 'showDashboard'])->name('dashboard');
+

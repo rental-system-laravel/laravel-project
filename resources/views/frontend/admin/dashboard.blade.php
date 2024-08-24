@@ -18,20 +18,13 @@
             @else
                 Welcome, Guest!
             @endif</h3>
-              <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span class="text-primary">3 unread alerts!</span></h6>
+
             </div>
             <div class="col-12 col-xl-4">
              <div class="justify-content-end d-flex">
               <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                <button class="btn btn-sm btn-light bg-white dropdown-toggle" type="button" id="dropdownMenuDate2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                 <i class="mdi mdi-calendar"></i> Today (10 Jan 2021)
-                </button>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
-                  <a class="dropdown-item" href="#">January - March</a>
-                  <a class="dropdown-item" href="#">March - June</a>
-                  <a class="dropdown-item" href="#">June - August</a>
-                  <a class="dropdown-item" href="#">August - November</a>
-                </div>
+
+
               </div>
              </div>
             </div>
@@ -73,7 +66,7 @@
                 <div class="card-body">
                   <p class="mb-4">Total Bookings</p>
                   <p class="fs-30 mb-2">{{ $acceptedTotalLongTime }}</p>
-
+<p></p>
                 </div>
               </div>
             </div>
@@ -108,21 +101,15 @@
               <p class="font-weight-500">The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc</p>
               <div class="d-flex flex-wrap mb-5">
                 <div class="mr-5 mt-3">
-                  <p class="text-muted">Order value</p>
-                  <h3 class="text-primary fs-30 font-weight-medium">12.3k</h3>
+                  <p class="text-muted">Total Accepted Booking Price</p>
+                  <h3 class="text-primary fs-30 font-weight-medium">{{ number_format($totalBookingPrice, 0) }}$</h3>
                 </div>
                 <div class="mr-5 mt-3">
-                  <p class="text-muted">Orders</p>
-                  <h3 class="text-primary fs-30 font-weight-medium">14k</h3>
+                  <p class="text-muted">Total Accepted Booking Price (Today)</p>
+                  <h3 class="text-primary fs-30 font-weight-medium">{{ number_format($totalBookingPriceToday, 0) }}$</h3>
                 </div>
-                <div class="mr-5 mt-3">
-                  <p class="text-muted">Users</p>
-                  <h3 class="text-primary fs-30 font-weight-medium">71.56%</h3>
-                </div>
-                <div class="mt-3">
-                  <p class="text-muted">Downloads</p>
-                  <h3 class="text-primary fs-30 font-weight-medium">34040</h3>
-                </div>
+
+
               </div>
               <canvas id="order-chart"></canvas>
             </div>
